@@ -1,0 +1,75 @@
+# AI Pet seed. This is the only file you write. It is frozen once you run `python -m pet init`.
+# Three words: [fractal] is how your pet grows, [genome] is what it grows from, [[goals]] is why.
+# This example is playable as is. Replace it with your own variant.
+
+[game]
+days = 28            # four weeks, then the final review
+frozen = false       # true turns this copy into the control twin: no mutations, no new rules
+
+[pinned]             # keep both fixed for the whole game, or growth is not comparable
+model = "fill in: the model id your agent runs on"
+harness = "fill in: Claude Code / Codex / hermes-agent / ... and its version"
+
+# FRACTAL: an L-system over the letters of a work cycle.
+# Core letters (the engine knows them): G goals, H hardest, R recall (CRISPR), O observe, P predict,
+# A act, C compare, L learn, T tell, M meta (write a new rule). [ ] is a parallel branch: a sub-agent.
+# Every cycle the axiom is rewritten `depth` times; depth grows by one every depth_every_days.
+[fractal]
+axiom = "X"
+max_length = 80
+depth_every_days = 3
+
+[fractal.alphabet]   # your own letters with their meaning
+X = "the base cycle"
+
+[fractal.rules]      # weights choose between alternatives at random
+X = [{ to = "G H R O P A C L T", weight = 1 }]
+A = [{ to = "A", weight = 0.6 }, { to = "[O A] [O A] C", weight = 0.4 }]
+L = [{ to = "L", weight = 0.7 }, { to = "L M", weight = 0.3 }]
+
+# GENOME: the starting rules your pet follows. Immutable genes are guarded by code.
+[[genome.genes]]
+id = "keep-home"
+text = "Do not break the machine you live on"
+immutable = true
+
+[[genome.genes]]
+id = "stay-in-folder"
+text = "Work inside this folder; ask before touching anything outside it"
+immutable = true
+
+[[genome.genes]]
+id = "quota"
+text = "Stay within the usage quota agreed with your human"
+immutable = true
+
+[[genome.genes]]
+id = "predict-first"
+text = "Write the prediction before acting, never after"
+
+[[genome.genes]]
+id = "small-steps"
+text = "Prefer the smallest step that tests the prediction"
+
+[[genome.genes]]
+id = "skills"
+text = "When the same steps work twice, name them as a skill"
+
+# GOALS: why your pet grows. Pick your own; everyone's will differ.
+[[goals]]
+id = "browser"
+text = "Learn to drive a real web browser on this machine"
+
+[[goals]]
+id = "self-report"
+text = "Report daily to your human what you learned, plainly and briefly"
+
+# Game rules. Change them only before init, and say so when you share results.
+[rules]
+edge = [0.5, 0.7]        # candidate tasks must have this chance of success: the edge of competence
+top_n = 5                # G lists this many candidates; H takes the hardest
+mutations_per_day = 1
+sos_window = 4           # this many equal outcomes in a row (all wins or all losses) trigger SOS
+sos_mutations = 3        # mutation quota per day under SOS
+trial_cycles = 3         # closed cycles a mutation must live before it can be judged
+reuse_threshold = 2      # a skill counts once it is used in this many cycles

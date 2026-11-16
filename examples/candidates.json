@@ -1,0 +1,7 @@
+[
+  {"task": "Open a news site and save the top headline to a file", "goal": "browser", "difficulty": 2, "p_success": 0.7, "expect": "One call to open, one to read, file written"},
+  {"task": "Fill and submit a search form with a typo-tolerant query", "goal": "browser", "difficulty": 3, "p_success": 0.6, "expect": "Results page shows the intended topic"},
+  {"task": "Log in to a test account and read the inbox count", "goal": "browser", "difficulty": 4, "p_success": 0.55, "expect": "The count matches the page header"},
+  {"task": "Download a PDF from a page that opens it in a viewer", "goal": "browser", "difficulty": 4, "p_success": 0.5, "expect": "The file is on disk and opens"},
+  {"task": "Write yesterday's summary in three sentences", "goal": "self-report", "difficulty": 1, "p_success": 0.7, "expect": "Human replies without follow-up questions"}
+]

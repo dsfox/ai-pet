@@ -1,0 +1,13 @@
+{
+  "success": false,
+  "outcome": "Two branches reached the inbox; the count was hidden behind a lazy-loaded widget",
+  "lesson": "Wait for network idle before reading counters",
+  "branches": [
+    {"name": "keyboard", "score": 0.4, "note": "tab navigation, slow"},
+    {"name": "selectors", "score": 0.7, "note": "found the widget, read it too early"}
+  ],
+  "merged": "selectors",
+  "skills_used": [],
+  "new_skill": {"name": "wait-network-idle", "how": "poll until no requests for 2 s, then read"},
+  "spacer": {"pattern": "lazy-loaded counter", "kind": "error", "note": "read only after network idle"}
+}
