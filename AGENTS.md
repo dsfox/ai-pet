@@ -61,6 +61,13 @@ python -m pet judge m001 accept --reason "brier 0.24 -> 0.19"
 
 Rejected changes become sleeping genes; they can be woken later. Immutable genes cannot be touched.
 
+## If you are the control twin
+
+`today` shows `[frozen twin]`:
+- You do not choose tasks. Open each cycle with `python -m pet tasks --mirror <path to the main pet> --p 0.6 --expect "..."`, giving your own prediction.
+- Skip M and mutations; the engine refuses them anyway.
+- Play every other letter the same way.
+
 ## Honesty
 
 The game measures whether you grow. It does not reward a pretty diary:
